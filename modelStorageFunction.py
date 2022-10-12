@@ -6,6 +6,7 @@
 # ## 流出高の計算
 
 # 木村の貯留関数法では、連続式、運動方程式を次のようにモデル化する。
+# 
 # $$
 # \begin{align}
 # \dfrac{ds}{dt} &= r_e - q_l \\
@@ -48,11 +49,10 @@ import pandas as pd
 from scipy import interpolate
 
 
-# In[4]:
+# In[2]:
 
 
 def calql(RainT, Rain, dt, k, p, Rsa):
-    # 降雨は慣習的に階段上に補間する。
     funcRain = interpolate.interp1d(RainT, Rain, kind='previous')
     
     nmax = int(RainT[-1]/dt)
@@ -83,6 +83,7 @@ def calql(RainT, Rain, dt, k, p, Rsa):
 # ## 流出量の計算
 
 # 遅れ時間$T_l$[hr]を考慮した流域からの流出量$Q_l$[$\rm{m^3/s}$]は流出高${q_l}_1,{q_l}_2$を用いて以下のように示す。
+# 
 # $$
 # \begin{align}
 # Q_l = \dfrac{1}{3.6}f_1 \cdot A \cdot {q_l}_1 + \dfrac{1}{3.6}(1-f_1) \cdot A \cdot {q_l}_2 + Q_b
